@@ -1,7 +1,7 @@
 class SocialStoryManager:
     def __init__(self):
-        self.users = {}  # 사용자 정보를 저장할 딕셔너리
-        self.stories = []  # 스토리를 저장할 리스트
+        self.users = {}
+        self.stories = []
 
     def register_user(self, username):
         if username not in self.users:
