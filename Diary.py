@@ -2,7 +2,7 @@ from datetime import datetime
 
 class DiaryManagerWithCalendar:
     def __init__(self):
-        self.users = {}  # 사용자 정보를 저장할 딕셔너리
+        self.users = {}
 
     def register_user(self, username):
         if username not in self.users:
