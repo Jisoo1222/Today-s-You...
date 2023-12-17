@@ -1,5 +1,6 @@
 import schedule
 import time
+from threading import Thread  # 쓰레딩을 사용하기 위해 추가
 
 class EmotionReminder:
     def __init__(self):
@@ -19,7 +20,8 @@ class EmotionReminder:
             print("사용자가 존재하지 않습니다.")
 
     def schedule_reminders(self):
-        for username, notification_time in self.users.items():
+        for username, user_info in self.users.items():
+            notification_time = user_info["notification_time"]
             schedule.every().day.at(notification_time).do(self.send_emotion_reminder, username)
 
     def run_scheduler(self):
@@ -34,6 +36,9 @@ emotion_reminder = EmotionReminder()
 emotion_reminder.register_user("User1", "09:00")
 emotion_reminder.register_user("User2", "12:30")
 
-# 알림 스케줄링 및 실행
+# 알림 스케줄링
 emotion_reminder.schedule_reminders()
-emotion_reminder.run_scheduler()
+
+# 쓰레드를 사용하여 스케줄러를 백그라운드에서 실행
+scheduler_thread = Thread(target=emotion_reminder.run_scheduler)
+scheduler_thread.start()
