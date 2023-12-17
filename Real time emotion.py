@@ -29,17 +29,17 @@ class RealTimeEmotionMonitor:
             else:
                 print("현재 사용자의 감정이 없습니다.")
 
-# 실시간 감정 모니터 초기화
-realtime_emotion_monitor = RealTimeEmotionMonitor()
+if __name__ == "__main__":
+    # 실시간 감정 모니터 초기화
+    realtime_emotion_monitor = RealTimeEmotionMonitor()
 
-# 사용자 등록 및 감정 생성
-realtime_emotion_monitor.register_user("User1")
-realtime_emotion_monitor.register_user("User2")
+    # 사용자 등록 및 감정 생성
+    realtime_emotion_monitor.register_user("User1")
+    realtime_emotion_monitor.register_user("User2")
 
-# 5초마다 감정 생성 및 실시간 모니터링
-for _ in range(10):  # 10번 반복 (50초 동안)
-    for username in realtime_emotion_monitor.users.keys():
-        realtime_emotion_monitor.generate_random_emotion(username)
+    # 5초마다 감정 생성 및 실시간 모니터링
+    for _ in range(10):  # 10번 반복 (50초 동안)
+        for username in realtime_emotion_monitor.users.keys():
+            realtime_emotion_monitor.generate_random_emotion(username)
 
-realtime_emotion_monitor.monitor_realtime_emotions()
-
+    realtime_emotion_monitor.monitor_realtime_emotions()
