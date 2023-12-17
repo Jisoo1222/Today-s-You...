@@ -1,4 +1,4 @@
-# 회원 가입
+# user.py
 class User:
     def __init__(self, username, email, password):
         self.username = username
@@ -8,10 +8,7 @@ class User:
     def sign_up(self):
         print(f"{self.username} 회원 가입을 진행합니다.")
 
-user = User("OurPreciousLife", "OurPreciousLife@gmail.com", "OurPreciousLife1234")
-user.sign_up()
-
-# 선호 콘텐츠 조사 
+# survey.py
 def content_preference_survey():
     print("선호하시는 콘텐츠를 선택해 주세요.")
     print("1. 시")
@@ -20,15 +17,6 @@ def content_preference_survey():
     print("4. 영화")
     print("5. 노래")
 
-content_preference_survey()
-
-# 모든(시,소설,드라마,영화,노래) 콘텐츠를 선호하는 것을 예시로 합니다.
-
-# 감정 세부 작성 
-
-# 여기서부터는 추후 일기 내용 활용 또는 저장 등을 추가할 수 있습니다.
-
-# 사용자 감정 분석하기 
 def user_emotion_survey():
     print("오늘 당신의 기분은?")
     print("1. 즐거움")
@@ -47,15 +35,13 @@ def user_emotion_survey():
         print("올바른 번호를 선택하세요.")
         return None
 
+# diary.py
 def write_diary_entry():
     print("\n오늘의 하루를 기록해보세요:")
     diary_entry = input("일기 내용을 입력하세요: ")
     return diary_entry
 
-# 감정별 추천 콘텐츠 목록 정의
-import random
-
-# 감정별 추천 콘텐츠 목록 정의
+# recommendation.py
 def recommend_content(emotion):
     recommendations = {
         "즐거움": ["시1", "소설1", "드라마1", "영화1", "노래1"],
@@ -65,6 +51,22 @@ def recommend_content(emotion):
         "우울함": ["시5", "소설5", "드라마5", "영화5", "노래5"]
     }
 
-    return recommendations[emotion]
+    return recommendations.get(emotion, [])
 
-print(recommend_content("기쁨"))
+# main.py
+from user import User
+from survey import content_preference_survey, user_emotion_survey
+from diary import write_diary_entry
+from recommendation import recommend_content
+
+user = User("OurPreciousLife", "OurPreciousLife@gmail.com", "OurPreciousLife1234")
+user.sign_up()
+
+content_preference_survey()
+
+# 사용자 감정 분석
+emotion = user_emotion_survey()
+
+# 추천 콘텐츠 출력
+recommendations = recommend_content(emotion)
+print(recommendations)
