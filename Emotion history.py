@@ -55,6 +55,8 @@ class EmotionHistoryManager:
             print(f"\n{username}님의 {month}의 감정 기록:")
             for day, emotion in monthly_emotions.items():
                 print(f"{month}-{day}: {emotion}")
+            
+            self._plot_emotion_distribution(monthly_emotions)
         else:
             print(f"{username}님의 {month}에 대한 감정 기록이 없습니다.")
 
@@ -64,8 +66,19 @@ class EmotionHistoryManager:
             print(f"\n{username}님의 {year}의 감정 기록:")
             for month, daily_emotions in yearly_emotions.items():
                 print(f"{month}: {', '.join([f'{day}: {emotion}' for day, emotion in daily_emotions.items()])}")
+            
+            self._plot_emotion_distribution(yearly_emotions)
         else:
             print(f"{username}님의 {year}에 대한 감정 기록이 없습니다.")
+
+    def _plot_emotion_distribution(self, emotions):
+        emotion_counts = {}
+        for emotion in emotions.values():
+            emotion_counts[emotion] = emotion_counts.get(emotion, 0) + 1
+
+        print("\n감정 분포:")
+        for emotion, count in emotion_counts.items():
+            print(f"{emotion}: {count}")
 
 # 감정 히스토리 매니저 초기화
 emotion_history_manager = EmotionHistoryManager()
